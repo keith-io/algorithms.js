@@ -1,25 +1,19 @@
-// need to check if it's sorted and sort until true
 function bubbleSort(array) {
-    var isSorted = false;
-    var sorted = array.slice(0);
+    var sorted = array.slice(0); // non-destructive
+    var isSorted = true;
     
-    for (var i = 0; i < sorted.length -1; i++) {
-        var current = i;
-        var next = i + 1;
-
-        if (current && next && (current > next)) {
-            swap(sorted, current, next);
+    while (isSorted) {
+        isSorted = false;
+        for (var i = 1; i < sorted.length; i++) {
+            var prev = i - 1;
+            var current = i;
+            if (sorted[current] < sorted[prev]) {
+                [sorted[current], sorted[prev]] = [sorted[prev], sorted[current]];
+      
+                isSorted = true;
+            }
         }
     }
-
-    if (isSorted) {
-        return sorted;
-    }
-}
-
-// swapping helper function
-function swap(array, i, j) {
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+    
+    return sorted;
 }
